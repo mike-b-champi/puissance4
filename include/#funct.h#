@@ -1,0 +1,13 @@
+#ifndef FUNCT_H
+#define FUNCT_H
+#include"struct.h"
+
+void help();
+void mods(int argc,char *argv[],struct s_game *mod);
+void about(struct s_player *pPlayer);
+void print_score(struct s_player *p1,struct s_player *p2,struct s_game *mod);
+int new_game();
+void start_game(struct s_player *p1,struct s_player *p2,int** grid,struct s_game *mod);
+
+
+#endif //FUNCT_H

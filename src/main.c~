@@ -1,0 +1,68 @@
+/**
+ * \file main.c
+ * \brief Puissance 4.
+ * \author Mickael.B
+ * \version 1.0
+ * \date 10 decembre 2011
+ *
+ * Puissance 4 réalisé pour un TD de programmation.
+ *
+ */
+#include<stdio.h>
+#include<stdlib.h>
+#include"funct.h"
+
+
+struct s_game
+{
+  int help;/*!<mod to show the help of the game. */
+  int gui;/*!<mod to use the graphic grid. */
+  int log;/*!<mod to save score. */
+};
+
+struct s_player
+{
+  char name[3]; /*!<name of the player. */
+  int score; /*!< score of the player. */
+};
+
+struct s_score
+{
+  int scoreP1;
+  int scoreP2;
+};
+
+/**
+ * \fn int main(int argc,char *argv[])
+ * \brief Entry of the programm
+ *
+ * \return 0 - normally stop of the programm.
+ */
+int main(int argc,char *argv[])
+{
+  s_game mod;
+  int i;
+  mods(argc,argv,&mod);
+  if(mod.help==1)
+    help();
+  else
+    {
+      s_player player1,player2;
+      int again = 1;
+      int** grid = (int**)malloc(7*sizeof(int*));
+      for(i=0;i<7;i++)
+	grid[i]=(int*)malloc(6*sizeof(int));
+      about(&player1);
+      about(&player2);
+      while(again)
+	{
+	  start_game(&player1,&player2,grid,&mod);
+	  again=new_game();
+	}
+      print_score(&player1,&player2,&mod);
+      for(i=0;i<7;i++)
+	free(grid[i]);
+      free(grid);
+    }
+  return 0;
+}
